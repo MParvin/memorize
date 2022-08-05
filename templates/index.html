@@ -11,7 +11,8 @@
             <div class="col-md-6">
                 <img src="{{ request.scheme }}://{{ request.get_host }}/{{ post.thumbnail.url }}" alt="{{ post.thumbnail_alt }}" class="img-fluid">
             </div>
-            <div class="col-md-6">
+            <br/>
+            <div class="col-md-6 col-sm-12 mt-10">
                 <p><b>Meaning:</b> {{ post.meaning }}</p>
                 <p><b>Usage in news:</b>{{ post.news }}</p>
                 <p><b>Other examples: </b>{{ post.examples }}</p>
