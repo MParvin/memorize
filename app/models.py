@@ -13,7 +13,8 @@ class Post(models.Model):
     meaning = models.TextField()
     news = models.TextField()
     examples = models.TextField()
-    thumbnail = models.ImageField(upload_to='images/', blank=True)
+    thumbnail = models.ImageField(upload_to='static/images/', blank=True)
+    thumbnail_alt = models.CharField(max_length=200, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -24,5 +25,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return f"/{self.slug}"
+    def get_image(self):
+        return self.thumbnail.url
+
+    # get 10 random posts
+    @staticmethod
+    def get_random_posts():
+        return Post.objects.order_by('?')[:10]
+        
