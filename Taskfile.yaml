@@ -1,0 +1,30 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  APP_NAME: "memorize"
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.APP_NAME}}"
+    silent: true
+
+  build:
+    cmds:
+      - docker rm -f "{{.APP_NAME}}"
+      - docker build -t "{{.APP_NAME}}" .
+      - docker run -d --name "{{.APP_NAME}}" -p 8001:8001 "{{.APP_NAME}}"
+      - docker ps | grep "{{.APP_NAME}}"
+
+  destroy:
+    cmds:
+      - docker rm -f "{{.APP_NAME}}"
+      - docker rmi "{{.APP_NAME}}"
+
+  status:
+    cmds:
+      - docker logs "{{.APP_NAME}}"
+      - docker ps | grep "{{.APP_NAME}}"
+      
