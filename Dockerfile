@@ -9,13 +9,20 @@ RUN apk add bash \
             gcc \
             libcurl \
             libc-dev \
-    && rm -rf /var/cache/apk/*
+            postgresql-dev \
+            musl-dev \
+            python3-dev \
+            jpeg-dev \
+            zlib-dev \
+    && rm -rf "/var/cache/apk/*"
 
 
 WORKDIR /code
 
-COPY . .
+COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-CMD ["gunicorn", "--bind", ":8001", "memorize.wsgi:application"]
+COPY . .
+
+ENTRYPOINT ["/bin/bash", "/code/entrypoint.sh" ]
