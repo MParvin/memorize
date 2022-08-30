@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  app:
+    image: mparvin/memorize
+    container_name: memorize
+    build: .
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - 8001:8001
+      # Todo: add nginx service and remover this port
+      # add volume for static
+  
+  db:
+    image: postgres:14
+    restart: always
+    env_file:
+      - .env
